@@ -217,7 +217,7 @@ const handleSubmit = () => {
   const features = [
     "Build a stunning resume in 3 minutes",
     "Beat ATS systems with a 98% score",
-    "50+ professional templates included",
+    "6+ professional templates included",
     "Export as PDF or share a live link",
   ];
 
