@@ -1149,12 +1149,12 @@ export default function ResumeBuilder() {
       <div style={{minHeight:"100vh",background:"#f0f4f8",display:"flex",flexDirection:"column"}}>
 
         {/* TOP BAR */}
-        <div style={{background:"#329476",padding:"0 18px",height:58,display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:100,boxShadow:"0 4px 16px rgba(0,0,0,0.2)"}}>
+        <div style={{background:"#3d459f",padding:"0 18px",height:58,display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:100,boxShadow:"0 4px 16px rgba(0,0,0,0.2)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{width:34,height:34,borderRadius:8,background:"#bcdbc3",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#fff",fontSize:16,fontFamily:"'Raleway',sans-serif"}}>🤖</div>
+            <div style={{width:34,height:34,borderRadius:8,background:"#0c2165",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,color:"#fff",fontSize:16,fontFamily:"'Raleway',sans-serif"}}>🤖</div>
             <div>
               <div style={{fontWeight:800,fontSize:14,color:"#fff",fontFamily:"'Raleway',sans-serif"}}>ResumeAI</div>
-              <div style={{fontSize:10,color:"#05115c"}}>6 Templates · AI Resume Analyzer</div>
+              <div style={{fontSize:10,color:"#f3f4fb"}}>6 Templates · AI Resume Analyzer</div>
             </div>
           </div>
           <div style={{display:"flex",alignItems:"center",gap:7,flexWrap:"wrap"}}>
@@ -1164,7 +1164,7 @@ export default function ResumeBuilder() {
               ))}
             </div>
             <button onClick={()=>setShowTpl(p=>!p)} style={{background:"rgba(255,255,255,0.12)",color:"#fff",border:"1px solid rgba(255,255,255,0.25)",borderRadius:8,padding:"7px 13px",fontSize:12,fontWeight:700}}>🎨 Templates</button>
-            <button onClick={()=>setShowAI(true)} style={{background:"linear-gradient(135deg,#7c3aed,#2563eb)",color:"#fff",border:"none",borderRadius:8,padding:"8px 14px",fontSize:12,fontWeight:700,boxShadow:"0 4px 12px rgba(124,58,237,0.4)",display:"flex",alignItems:"center",gap:6}}>
+            <button onClick={()=>setShowAI(true)} style={{background:"linear-gradient(13deg,#7c3aed,#23eb)",color:"#fefcfc",border:"none",borderRadius:8,padding:"8px 14px",fontSize:12,fontWeight:700,boxShadow:"0 4px 12px rgba(196, 190, 227, 0.4)",display:"flex",alignItems:"center",gap:6}}>  
               🤖 AI Analyzer
             </button>
             <button onClick={handleDownload} disabled={downloading} style={{background:downloading?"#334155":"#16a34a",color:"#fff",border:"none",borderRadius:8,padding:"8px 16px",fontSize:12,fontWeight:700,display:"flex",alignItems:"center",gap:6}}>
@@ -1196,7 +1196,7 @@ export default function ResumeBuilder() {
                   {activeSection===n.id&&<span style={{marginLeft:"auto",width:5,height:5,borderRadius:"50%",background:"#2563eb"}}/>}
                 </button>
               ))}
-              <div style={{margin:"14px 4px 0",padding:"10px",background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:9}}>
+              <div style={{margin:"14px 4px 0",padding:"10px",background:"#c6d4df",border:"1px solid #bbf7d0",borderRadius:9}}>
                 <div style={{fontSize:10.5,fontWeight:700,color:"#166534",marginBottom:3}}>💡 Tip</div>
                 <div style={{fontSize:10.5,color:"#166534",lineHeight:1.5}}>Use strong action verbs: "Built", "Led", "Increased" for maximum impact.</div>
               </div>
