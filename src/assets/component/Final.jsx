@@ -60,7 +60,6 @@ select option{background:#ffffff;color:#14532d;}
 .score-ring-enter{animation:fadeIn 0.6s ease both;}
 `;
 
-/* ─── TEMPLATES ──────────────────────────────────────────────────── */
 const TEMPLATES = [
   { id: "midnight", name: "Midnight", tag: "Dark Elegant", accent: "#818cf8" },
   { id: "arctic", name: "Arctic", tag: "Clean Modern", accent: "#06b6d4" },
