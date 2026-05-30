@@ -2,14 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
-/* ── green palette ── */
+import { useTheme } from "../../../context/ThemeContext";
+
+
 const G = {
   50: "#f0fdf4", 100: "#dcfce7", 200: "#bbf7d0",
   300: "#86efac", 400: "#4ade80", 500: "#22c55e",
   600: "#16a34a", 700: "#15803d",
 };
 
-/* ── floating particle canvas ── */
+
 function Particles() {
   const ref = useRef(); const raf = useRef(); const pts = useRef([]);
   useEffect(() => {
@@ -50,7 +52,7 @@ function Particles() {
   return <canvas ref={ref} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }} />;
 }
 
-/* ── floating shapes (left panel deco) ── */
+
 function FloatShape({ size, color, top, left, delay, shape = "circle" }) {
   return (
     <div style={{
@@ -64,7 +66,7 @@ function FloatShape({ size, color, top, left, delay, shape = "circle" }) {
   );
 }
 
-/* ── google icon svg ── */
+
 function GoogleIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -94,17 +96,16 @@ function Typewriter({ texts }) {
   );
 }
 
-/* ── input field ── */
-function Input({ label, type, placeholder, icon, value, onChange, error }) {
+function Input({ label, type, placeholder, icon, value, onChange, error, dark }) {
   const [focused, setFocused] = useState(false); const [show, setShow] = useState(false);
   const isPass = type === "password";
   return (
     <div style={{ marginBottom: 18 }}>
-      <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#374151", marginBottom: 7, letterSpacing: "-0.01em" }}>{label}</label>
+      <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: dark ? "#94a3b8" : "#374151", marginBottom: 7, letterSpacing: "-0.01em" }}>{label}</label>
       <div style={{
         display: "flex", alignItems: "center",
-        border: `1.5px solid ${error ? "#ef4444" : focused ? G[500] : "#e5e7eb"}`,
-        borderRadius: 12, background: "#fff", overflow: "hidden",
+        border: `1.5px solid ${error ? "#ef4444" : focused ? G[500] : dark ? "#334155" : "#e5e7eb"}`,
+        borderRadius: 12, background: dark ? "#0f172a" : "#fff", overflow: "hidden",
         boxShadow: focused ? `0 0 0 3px ${G[500]}20` : "0 1px 3px rgba(0,0,0,0.06)",
         transition: "all .25s ease",
       }}>
@@ -114,7 +115,7 @@ function Input({ label, type, placeholder, icon, value, onChange, error }) {
           placeholder={placeholder} value={value} onChange={onChange}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           style={{ flex: 1, border: "none", outline: "none", padding: "13px 0",
-            fontSize: 14.5, color: "#111827", background: "transparent", fontFamily: "inherit" }}
+            fontSize: 14.5, color: dark ? "#f1f5f9" : "#111827", background: "transparent", fontFamily: "inherit" }}
         />
         {isPass && (
           <button onClick={() => setShow(s => !s)} style={{ border: "none", background: "none", cursor: "pointer",
@@ -126,7 +127,7 @@ function Input({ label, type, placeholder, icon, value, onChange, error }) {
   );
 }
 
-/* ── google button ── */
+
 function GoogleButton({ onClick, loading }) {
   const [h, setH] = useState(false);
   return (
@@ -151,10 +152,85 @@ function GoogleButton({ onClick, loading }) {
   );
 }
 
+function ThemeToggle({ dark, onToggle }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onToggle}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      title={dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      style={{
+        position: "absolute",
+        top: 20,
+        right: 24,
+        zIndex: 10,
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "8px 14px",
+        borderRadius: 40,
+        border: `1.5px solid ${dark ? "#334155" : "#e5e7eb"}`,
+        background: dark
+          ? hovered ? "#1e293b" : "#0f172a"
+          : hovered ? "#f3f4f6" : "#fff",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        fontSize: 13,
+        fontWeight: 600,
+        color: dark ? "#94a3b8" : "#6b7280",
+        boxShadow: hovered
+          ? dark ? "0 4px 20px rgba(0,0,0,0.4)" : "0 4px 16px rgba(0,0,0,0.1)"
+          : "0 1px 4px rgba(0,0,0,0.06)",
+        transform: hovered ? "translateY(-1px)" : "translateY(0)",
+        transition: "all .25s ease",
+        whiteSpace: "nowrap",
+      }}
+    >
+      
+      <div style={{
+        position: "relative",
+        width: 38,
+        height: 22,
+        borderRadius: 11,
+        background: dark
+          ? `linear-gradient(135deg, #1e3a5f, #0f172a)`
+          : `linear-gradient(135deg, ${G[400]}, ${G[500]})`,
+        border: `1.5px solid ${dark ? "#334155" : G[300]}`,
+        transition: "all .35s ease",
+        flexShrink: 0,
+      }}>
+        
+        <div style={{
+          position: "absolute",
+          top: 2,
+          left: dark ? 17 : 2,
+          width: 14,
+          height: 14,
+          borderRadius: "50%",
+          background: "#fff",
+          boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
+          transition: "left .3s cubic-bezier(.34,1.56,.64,1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 8,
+        }}>
+          {dark ? "🌙" : "☀️"}
+        </div>
+      </div>
+      <span style={{ transition: "color .25s" }}>
+        {dark ? "Dark" : "Light"}
+      </span>
+    </button>
+  );
+}
+
 /* ── main ── */
 export default function App() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState("login"); // login | signup | forgot
+  const { dark, toggleTheme } = useTheme();
+  const [mode, setMode] = useState("login");
   const [email, setEmail] = useState(""); const [pass, setPass] = useState(""); const [name, setName] = useState("");
   const [errors, setErrors] = useState({});
   const [gLoading, setGLoading] = useState(false); const [submitting, setSubmitting] = useState(false);
@@ -174,46 +250,34 @@ export default function App() {
     setErrors(e); return Object.keys(e).length === 0;
   };
 
-const handleSubmit = () => {
-  if (!validate()) return;
+  const handleSubmit = () => {
+    if (!validate()) return;
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      navigate("/Final");
+    }, 1000);
+  };
 
-  setSubmitting(true);
-
-  setTimeout(() => {
-    setSubmitting(false);
-
-    navigate("/Final");
-
-  }, 1000);
-};
-
- const handleGoogle = async () => {
-  try {
-    setGLoading(true);
-
-    const result = await signInWithPopup(auth, provider);
-
-    const user = result.user;
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
+  const handleGoogle = async () => {
+    try {
+      setGLoading(true);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      localStorage.setItem("user", JSON.stringify({
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
-      })
-    );
-    navigate("/Final");
+      }));
+      navigate("/Final");
+    } catch (error) {
+      console.log(error);
+      alert("Google Login Failed");
+    } finally {
+      setGLoading(false);
+    }
+  };
 
-    console.log(user);
-
-  } catch (error) {
-    console.log(error);
-    alert("Google Login Failed");
-  } finally {
-    setGLoading(false);
-  }
-};
   const features = [
     "Build a stunning resume in 3 minutes",
     "Beat ATS systems with a 98% score",
@@ -249,15 +313,12 @@ const handleSubmit = () => {
         display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 52px",
       }}>
         <Particles />
-
-        {/* deco shapes */}
         <FloatShape size={90} color={G[200]} top="8%" left="72%" delay={0} shape="circle" />
         <FloatShape size={55} color="#fff" top="20%" left="10%" delay={1.2} shape="square" />
         <FloatShape size={70} color={G[300]} top="68%" left="78%" delay={2} shape="diamond" />
         <FloatShape size={40} color="#fff" top="78%" left="15%" delay={0.6} shape="circle" />
         <FloatShape size={110} color={G[700]} top="40%" left="62%" delay={1.8} shape="square" />
 
-        {/* logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 52, position: "relative", zIndex: 2, animation: "fadeUp .7s ease both" }}>
           <div style={{ width: 42, height: 42, borderRadius: 12, background: "rgba(255,255,255,0.25)",
             backdropFilter: "blur(8px)", border: "1.5px solid rgba(255,255,255,0.4)",
@@ -265,11 +326,9 @@ const handleSubmit = () => {
           <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", letterSpacing: "-0.04em" }}>ResumeAI</span>
         </div>
 
-        {/* headline */}
         <div style={{ position: "relative", zIndex: 2, animation: "fadeUp .7s ease .1s both" }}>
           <h1 style={{ fontSize: "clamp(28px,3vw,40px)", fontWeight: 800, color: "#fff",
-            letterSpacing: "-0.04em", lineHeight: 1.15, margin: "0 0 16px",
-            fontFamily: "'Lora', serif" }}>
+            letterSpacing: "-0.04em", lineHeight: 1.15, margin: "0 0 16px", fontFamily: "'Lora', serif" }}>
             Land your dream job<br />with AI-powered resumes
           </h1>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.82)", lineHeight: 1.7, maxWidth: 340, margin: "0 0 40px" }}>
@@ -277,7 +336,6 @@ const handleSubmit = () => {
           </p>
         </div>
 
-        {/* animated feature list */}
         <div style={{ position: "relative", zIndex: 2 }}>
           {features.map((f, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14,
@@ -290,7 +348,6 @@ const handleSubmit = () => {
           ))}
         </div>
 
-        {/* scrolling testimonial ticker */}
         <div style={{ marginTop: 44, overflow: "hidden", height: 72, position: "relative", zIndex: 2 }}>
           <div style={{ animation: "marqueeScroll 10s linear infinite" }}>
             {[
@@ -315,11 +372,14 @@ const handleSubmit = () => {
         </div>
       </div>
 
-      {/* ── RIGHT PANEL ── */}
+     
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
-        background: "#f9fafb", padding: "40px 24px", position: "relative", overflow: "hidden" }}>
+        background: dark ? "#0f172a" : "#f9fafb", padding: "40px 24px", position: "relative", overflow: "hidden",
+        transition: "background .3s" }}>
 
-        {/* soft bg circles */}
+       
+        <ThemeToggle dark={dark} onToggle={toggleTheme} />
+
         <div style={{ position: "absolute", width: 400, height: 400, borderRadius: "50%",
           background: `radial-gradient(circle, ${G[50]} 0%, transparent 70%)`,
           top: "-10%", right: "-5%", pointerEvents: "none" }} />
@@ -327,9 +387,10 @@ const handleSubmit = () => {
           background: `radial-gradient(circle, ${G[50]} 0%, transparent 70%)`,
           bottom: "0%", left: "0%", pointerEvents: "none" }} />
 
-        <div style={{ width: "100%", maxWidth: 420, position: "relative", zIndex: 2 }}>
-
-          {/* ── SUCCESS STATE ── */}
+        <div style={{ width: "100%", maxWidth: 420, position: "relative", zIndex: 2,
+          background: dark ? "#1e293b" : "transparent", borderRadius: 24,
+          padding: dark ? "32px" : "0", boxShadow: dark ? "0 8px 40px rgba(0,0,0,0.4)" : "none",
+          transition: "all .3s" }}>
           {success ? (
             <div style={{ textAlign: "center", animation: "scaleIn .5s cubic-bezier(.34,1.56,.64,1) both" }}>
               <div style={{ position: "relative", width: 90, height: 90, margin: "0 auto 24px" }}>
@@ -341,44 +402,36 @@ const handleSubmit = () => {
                   fontSize: 38, boxShadow: `0 12px 40px ${G[500]}50`,
                   animation: "checkPop .5s cubic-bezier(.34,1.56,.64,1) .1s both" }}>✓</div>
               </div>
-              <h2 style={{ fontSize: 26, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em", marginBottom: 10 }}>
+              <h2 style={{ fontSize: 26, fontWeight: 800, color: dark ? "#f1f5f9" : "#111827", letterSpacing: "-0.03em", marginBottom: 10 }}>
                 {mode === "forgot" ? "Email sent!" : "Welcome aboard! 🎉"}
               </h2>
               <p style={{ color: "#6b7280", fontSize: 15, lineHeight: 1.65, marginBottom: 28 }}>
                 {mode === "forgot"
                   ? "Check your inbox for a password reset link."
-                  : mode === "login" ? "You're signed in. Redirecting to your dashboard..." : "Account created! Redirecting now..."}
+                  : mode === "login" ? "You're signed in. Redirecting..." : "Account created! Redirecting now..."}
               </p>
-              <div style={{ height: 4, background: G[100], borderRadius: 2, overflow: "hidden" }}>
-                <div style={{ height: "100%", background: `linear-gradient(90deg,${G[500]},${G[400]})`,
-                  borderRadius: 2, animation: "scaleIn 1.8s ease both", transformOrigin: "left",
-                  width: "100%" }} />
-              </div>
             </div>
-
           ) : (
             <div style={{ animation: panelIn ? "slideIn .28s ease both" : "slideOut .28s ease both" }}>
-
-              {/* logo mobile */}
               <div style={{ display: "flex", alignItems: "center", gap: 8, justifyContent: "center", marginBottom: 36 }}>
                 <div style={{ width: 34, height: 34, borderRadius: 9,
                   background: `linear-gradient(135deg,${G[400]},${G[600]})`,
                   display: "flex", alignItems: "center", justifyContent: "center", fontSize: 17,
                   boxShadow: `0 4px 14px ${G[500]}50` }}>✦</div>
-                <span style={{ fontSize: 20, fontWeight: 800, color: "#111827", letterSpacing: "-0.04em" }}>
+                <span style={{ fontSize: 20, fontWeight: 800, color: dark ? "#f1f5f9" : "#111827", letterSpacing: "-0.04em" }}>
                   Resume<span style={{ color: G[500] }}>AI</span>
                 </span>
               </div>
 
               {mode === "forgot" ? (
                 <>
-                  <h2 style={{ fontSize: 26, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em", marginBottom: 8, textAlign: "center" }}>
+                  <h2 style={{ fontSize: 26, fontWeight: 800, color: dark ? "#f1f5f9" : "#111827", letterSpacing: "-0.03em", marginBottom: 8, textAlign: "center" }}>
                     Reset your password
                   </h2>
-                  <p style={{ color: "#6b7280", fontSize: 14.5, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>
+                  <p style={{ color: dark ? "#94a3b8" : "#6b7280", fontSize: 14.5, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>
                     Enter your email and we'll send a reset link.
                   </p>
-                  <Input label="Email address" type="email" placeholder="you@example.com" icon="📧"
+                  <Input label="Email address" type="email" placeholder="you@example.com" icon="📧" dark={dark}
                     value={email} onChange={e => setEmail(e.target.value)} error={errors.email} />
                   <button onClick={handleSubmit} disabled={submitting}
                     style={{ width: "100%", padding: "14px", borderRadius: 12, border: "none",
@@ -398,53 +451,47 @@ const handleSubmit = () => {
                 </>
               ) : (
                 <>
-                  {/* tabs */}
-                  <div style={{ display: "flex", background: "#f3f4f6", borderRadius: 12, padding: 4, marginBottom: 28 }}>
+                  <div style={{ display: "flex", background: dark ? "#0f172a" : "#f3f4f6", borderRadius: 12, padding: 4, marginBottom: 28 }}>
                     {[["login", "Sign In"], ["signup", "Create Account"]].map(([m, label]) => (
                       <button key={m} onClick={() => switchMode(m)}
                         style={{ flex: 1, padding: "10px", borderRadius: 9, border: "none", cursor: "pointer",
                           fontFamily: "inherit", fontSize: 14, fontWeight: 700, transition: "all .25s ease",
-                          background: mode === m ? "#fff" : "transparent",
-                          color: mode === m ? "#111827" : "#9ca3af",
+                          background: mode === m ? (dark ? "#1e293b" : "#fff") : "transparent",
+                          color: mode === m ? (dark ? "#f1f5f9" : "#111827") : "#9ca3af",
                           boxShadow: mode === m ? "0 2px 8px rgba(0,0,0,0.08)" : "none" }}>
                         {label}
                       </button>
                     ))}
                   </div>
 
-                  {/* heading */}
                   <div style={{ marginBottom: 24, textAlign: "center" }}>
-                    <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111827", letterSpacing: "-0.03em", margin: "0 0 6px" }}>
+                    <h2 style={{ fontSize: 24, fontWeight: 800, color: dark ? "#f1f5f9" : "#111827", letterSpacing: "-0.03em", margin: "0 0 6px" }}>
                       {mode === "login" ? "Welcome back 👋" : "Start for free 🚀"}
                     </h2>
                     <p style={{ color: "#6b7280", fontSize: 14, lineHeight: 1.6 }}>
                       {mode === "login"
-                        ? <><Typewriter texts={["Sign in to continue building.", "Your resume is waiting for you.", "One click to your dashboard."]} /></>
+                        ? <Typewriter texts={["Sign in to continue building.", "Your resume is waiting for you.", "One click to your dashboard."]} />
                         : "Create your account in seconds."}
                     </p>
                   </div>
 
-                  {/* google */}
                   <GoogleButton onClick={handleGoogle} loading={gLoading} />
 
-                  {/* divider */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "20px 0" }}>
-                    <div style={{ flex: 1, height: 1, background: "#e5e7eb" }} />
+                    <div style={{ flex: 1, height: 1, background: dark ? "#1e293b" : "#e5e7eb" }} />
                     <span style={{ fontSize: 12, color: "#9ca3af", fontWeight: 600 }}>OR CONTINUE WITH EMAIL</span>
-                    <div style={{ flex: 1, height: 1, background: "#e5e7eb" }} />
+                    <div style={{ flex: 1, height: 1, background: dark ? "#1e293b" : "#e5e7eb" }} />
                   </div>
 
-                  {/* fields */}
                   {mode === "signup" && (
-                    <Input label="Full name" type="text" placeholder="Alex Johnson" icon="👤"
+                    <Input label="Full name" type="text" placeholder="Alex Johnson" icon="👤" dark={dark}
                       value={name} onChange={e => setName(e.target.value)} error={errors.name} />
                   )}
-                  <Input label="Email address" type="email" placeholder="you@example.com" icon="📧"
+                  <Input label="Email address" type="email" placeholder="you@example.com" icon="📧" dark={dark}
                     value={email} onChange={e => setEmail(e.target.value)} error={errors.email} />
-                  <Input label="Password" type="password" placeholder={mode === "login" ? "Your password" : "Create a strong password"} icon="🔒"
+                  <Input label="Password" type="password" dark={dark} placeholder={mode === "login" ? "Your password" : "Create a strong password"} icon="🔒"
                     value={pass} onChange={e => setPass(e.target.value)} error={errors.pass} />
 
-                  {/* forgot */}
                   {mode === "login" && (
                     <div style={{ textAlign: "right", marginTop: -10, marginBottom: 20 }}>
                       <button onClick={() => switchMode("forgot")}
@@ -455,7 +502,6 @@ const handleSubmit = () => {
                     </div>
                   )}
 
-                  {/* terms for signup */}
                   {mode === "signup" && (
                     <p style={{ fontSize: 12.5, color: "#9ca3af", lineHeight: 1.65, marginBottom: 20, marginTop: 4 }}>
                       By creating an account you agree to our{" "}
@@ -464,15 +510,13 @@ const handleSubmit = () => {
                     </p>
                   )}
 
-                  {/* submit */}
                   <button onClick={handleSubmit} disabled={submitting}
                     style={{ width: "100%", padding: "15px", borderRadius: 12, border: "none",
                       background: submitting ? G[300] : `linear-gradient(135deg,${G[500]},${G[600]})`,
                       color: "#fff", fontSize: 15.5, fontWeight: 700, cursor: submitting ? "not-allowed" : "pointer",
                       fontFamily: "inherit", letterSpacing: "-0.01em", transition: "all .3s ease",
                       boxShadow: submitting ? "none" : `0 10px 32px ${G[500]}45`,
-                      display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-                      transform: submitting ? "none" : undefined }}
+                      display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}
                     onMouseEnter={e => { if (!submitting) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 14px 40px ${G[500]}55`; } }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 10px 32px ${G[500]}45`; }}>
                     {submitting
@@ -480,7 +524,6 @@ const handleSubmit = () => {
                       : mode === "login" ? "Sign In to ResumeAI →" : "Create My Free Account →"}
                   </button>
 
-                  {/* switch mode link */}
                   <p style={{ textAlign: "center", marginTop: 22, fontSize: 13.5, color: "#6b7280" }}>
                     {mode === "login" ? "Don't have an account? " : "Already have an account? "}
                     <button onClick={() => switchMode(mode === "login" ? "signup" : "login")}
