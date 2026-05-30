@@ -1,19 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 
-/* ─── GREEN PALETTE ───────────────────────────────────────────────── */
  const G = { 50: "#e1e1f5", 100: "#a69fe1", 200: "#c4ddd6", 400: "#1D9E75", 500: "#0F6E56",  600: "#085041", 900: "#04342C"};
 
-
-// const G = { 50: "#F1EFE8",  100: "#D3D1C7",200: "#B4B2A9", 400: "#888780",500: "#5F5E5A",  600: "#444441",  900: "#2C2C2A" };
-
-// const G = { 50: "#F1EFE8",  100: "#D3D1C7", 200: "#B4B2A9",400: "#888780", 500: "#5F5E5A", 600: "#444441",900: "#2C2C2A",};
-
-
-
-// const G = { 50: "#EAF3DE",100: "#C0DD97",  200: "#97C459", 400: "#639922",500: "#3B6D11", 600: "#27500A", 900: "#173404"};
-
-
-/* ─── GLOBAL CSS ──────────────────────────────────────────────────── */
 const GLOBAL_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -175,7 +163,6 @@ const BulletList = ({ bullets, color = "#0d3068" }) => {
   );
 };
 
-/* ─── TEMPLATE 1: MIDNIGHT ─── */
 function MidnightTemplate({ data }) {
   const ac = "#818cf8";
   const sidebar = "#111827";
@@ -675,7 +662,6 @@ function EntryCard({ year, title, sub, extra, desc, ac, dark }) {
   );
 }
 
-/* ─── TEMPLATE 2: ARCTIC ─── */
 function ArcticTemplate({ data }) {
   const ac = "#0891b2";
   return (
