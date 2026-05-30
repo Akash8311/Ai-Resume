@@ -322,7 +322,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 52, position: "relative", zIndex: 2, animation: "fadeUp .7s ease both" }}>
           <div style={{ width: 42, height: 42, borderRadius: 12, background: "rgba(255,255,255,0.25)",
             backdropFilter: "blur(8px)", border: "1.5px solid rgba(255,255,255,0.4)",
-            display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>✦</div>
+            display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🤖</div>
           <span style={{ fontSize: 22, fontWeight: 800, color: "#fff", letterSpacing: "-0.04em" }}>ResumeAI</span>
         </div>
 
