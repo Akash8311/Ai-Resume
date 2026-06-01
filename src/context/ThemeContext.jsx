@@ -7,13 +7,20 @@ export function ThemeProvider({ children }) {
     return localStorage.getItem("theme") === "dark";
   });
 
+  const toggleTheme = () => {
+    setDark(prev => !prev);
+  };
+
   useEffect(() => {
     localStorage.setItem("theme", dark ? "dark" : "light");
-    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    document.documentElement.setAttribute(
+      "data-theme",
+      dark ? "dark" : "light"
+    );
   }, [dark]);
 
   return (
-    <ThemeContext.Provider value={{ dark, setDark }}>
+    <ThemeContext.Provider value={{ dark, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

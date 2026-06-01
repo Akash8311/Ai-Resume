@@ -346,8 +346,8 @@ const t2 = setTimeout(() => onDone(), 3200);
           <div style={{
             position:"relative",
             width:110, height:110, borderRadius:28,
-            background:"linear-gradient(135deg,#000000,#051a0b)",
-            border:"1.5px solid rgba(34,197,94,0.5)",
+            background:" rgba(130, 201, 158, 0.95)",
+            border:"1.5px solid rgb(34, 197, 94)",
             display:"flex", alignItems:"center", justifyContent:"center",
             fontSize:52,
             boxShadow:"0 0 40px rgba(34,197,94,0.5), inset 0 0 30px rgba(34,197,94,0.05)",
@@ -1010,7 +1010,6 @@ function ThemeToggle({dark,setDark}){
   );
 }
 
-/* ─── SECTION IDS for nav ─── */
 const SECTION_IDS = {
   Features:"features-section",
   Templates:"templates-section",
@@ -1023,9 +1022,6 @@ function scrollToSection(id){
   if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-/* ═══════════════════════════════════════════════════
-   ─── MAIN EXPORT ───
-   ═══════════════════════════════════════════════════ */
 export default function Home(){
    const navigate = useNavigate();
   const [dark,setDark]=useState(true);
@@ -1175,14 +1171,14 @@ export default function Home(){
 
         <FloatBadge style={{left:"5%",bottom:"20%",width:180,opacity:.9}} delay={1.5} dark={dark}>
           <div style={{fontSize:11,color:"#8b5cf6",fontWeight:700,marginBottom:6,textTransform:"uppercase",letterSpacing:".08em"}}>🎉 Just Hired!</div>
-          <div style={{fontSize:13,fontWeight:600,color:dark?"#e2e8f0":"#374151"}}>Akash landed a role at Stripe</div>
-          <div style={{fontSize:11,color:muted,marginTop:4}}>2 minutes ago</div>
+          <div style={{fontSize:13,fontWeight:600,color:dark?"#e2e8f0":"#374151"}}>Akash  got hired at Jis University</div>
+          <div style={{fontSize:11,color:muted,marginTop:4}}>10 minutes ago</div>
         </FloatBadge>
 
         <FloatBadge style={{right:"5%",bottom:"20%",width:180,opacity:.9}} delay={2} dark={dark}>
           <div style={{fontSize:11,color:G[600],fontWeight:700,marginBottom:6,textTransform:"uppercase",letterSpacing:".08em"}}>🎉 Just Hired!</div>
           <div style={{fontSize:13,fontWeight:600,color:dark?"#e2e8f0":"#374151"}}>Priya got hired at Google</div>
-          <div style={{fontSize:11,color:muted,marginTop:4}}>5 minutes ago</div>
+          <div style={{fontSize:11,color:muted,marginTop:4}}>6 minutes ago</div>
         </FloatBadge>
 
         <div style={{maxWidth:760,textAlign:"center",position:"relative",zIndex:2,transform:`translateY(${-heroParallax*0.2}px)`}}>

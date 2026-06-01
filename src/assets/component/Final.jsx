@@ -1,4 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+
 
  const G = { 50: "#e1e1f5", 100: "#a69fe1", 200: "#c4ddd6", 400: "#1D9E75", 500: "#0F6E56",  600: "#085041", 900: "#04342C"};
 
@@ -5165,7 +5168,9 @@ function TemplatePanel({ activeTpl, onSelect, onClose }) {
 /* ══════════════════════════════════════════════════════
    MAIN APP
 ══════════════════════════════════════════════════════ */
-export default function ResumeBuilder() {
+export default function Final() {
+  const [showLogout, setShowLogout] = useState(false);
+  const navigate = useNavigate();
   const [data, setData] = useState(EMPTY_DATA());
   const [activeSection, setActiveSection] = useState("basics");
   const [activeTpl, setActiveTpl] = useState("midnight");
@@ -5940,6 +5945,69 @@ export default function ResumeBuilder() {
                 "⬇ Save PDF"
               )}
             </button>
+
+            
+           
+  <div style={{ position: "relative", display: "inline-block" }}>
+  <button
+    onClick={() => setShowLogout(!showLogout)}
+    style={{
+      background: "transparent",
+      border: `1.5px solid ${G[200]}`,
+      borderRadius: 8,
+      padding: "6px 10px",
+      fontSize: 18,
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <CgProfile color={G[600]} size={22} />
+  </button>
+
+  {showLogout && (
+    <div
+      style={{
+        position: "absolute",
+        top: "110%",
+        right: 0,
+        background: "#fff",
+        border: `1px solid ${G[200]}`,
+        borderRadius: 10,
+        boxShadow: `0 8px 24px rgba(22,163,74,0.15)`,
+        overflow: "hidden",
+        zIndex: 1000,
+        minWidth: 140,
+      }}
+    >
+      <button
+        onClick={() => navigate("/")}
+        style={{
+          width: "100%",
+          background: "transparent",
+          border: "none",
+          padding: "10px 16px",
+          fontSize: 13,
+          fontWeight: 600,
+          color: "#ef4444",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          textAlign: "left",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "#fef2f2")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+      >
+        <span>🚪</span> Log Out
+      </button>
+    </div>
+  )}
+</div>
+
+
+
           </div>
         </div>
 
