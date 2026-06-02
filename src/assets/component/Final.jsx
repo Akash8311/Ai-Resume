@@ -5762,7 +5762,7 @@ export default function Final() {
                   letterSpacing: -0.3,
                 }}
               >
-                ResumeAi
+               AIResume
               </div>
               <div style={{ fontSize: 9.5, color: G[300] }}>
                 8 templates · AI analyzer · A4 PDF

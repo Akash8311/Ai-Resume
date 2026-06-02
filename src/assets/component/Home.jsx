@@ -379,14 +379,14 @@ const t2 = setTimeout(() => onDone(), 3200);
                 position:"absolute", top:0, left:0, right:0,
                 transform:"translateX(-3px)", clipPath:"inset(20% 0 40% 0)",
                 animation:"none",
-              }}>Resume<span style={{color:"#4ade80"}}>AI</span></h1>
+              }}>AI<span style={{color:"#4ade80"}}>Resume</span></h1>
               <h1 style={{
                 fontSize:"clamp(40px,7vw,80px)", fontWeight:900, letterSpacing:"-0.06em",
                 color:"rgba(34,197,94,0.8)", fontFamily:"Georgia,serif",
                 position:"absolute", top:0, left:0, right:0,
                 transform:"translateX(3px)", clipPath:"inset(60% 0 10% 0)",
                 animation:"none",
-              }}>Resume<span style={{color:"#4ade80"}}>AI</span></h1>
+              }}>AI<span style={{color:"#4ade80"}}>Resume</span></h1>
             </>
           )}
           <h1 style={{
@@ -396,7 +396,7 @@ const t2 = setTimeout(() => onDone(), 3200);
             animation:"fadeUp 1s cubic-bezier(.22,1,.36,1) .3s both",
             textShadow:"0 0 60px rgba(34,197,94,0.4)",
           }}>
-            Resume<span style={{color:G[400]}}>AI</span>
+            AI<span style={{color:G[400]}}>Resume</span>
           </h1>
         </div>
 
@@ -1119,7 +1119,7 @@ export default function Home(){
         transition:"all .4s ease",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:10,zIndex:1}}>
           <div style={{width:36,height:36,borderRadius:10,background:`linear-gradient(135deg,${G[400]},${G[600]})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,boxShadow:`0 4px 14px ${G[400]}70`,animation:"rotateIn .6s cubic-bezier(.34,1.56,.64,1) both"}}>🤖</div>
-          <span style={{fontWeight:800,fontSize:19,letterSpacing:"-0.04em",color:text}}>Resume<span style={{color:G[500]}}>AI</span></span>
+          <span style={{fontWeight:800,fontSize:19,letterSpacing:"-0.04em",color:text}}>AI<span style={{color:G[500]}}>Resume</span></span>
         </div>
         <div style={{display:"flex",gap:32,zIndex:1}}>
           {Object.entries(SECTION_IDS).map(([label,id])=>(
@@ -1263,7 +1263,7 @@ export default function Home(){
         <div style={{maxWidth:1200,margin:"0 auto"}}>
           <Reveal direction="up">
             <div style={{textAlign:"center",marginBottom:64}}>
-              <div style={{fontSize:12,color:G[600],fontWeight:700,letterSpacing:".14em",textTransform:"uppercase",marginBottom:12}}>Why ResumeAI</div>
+              <div style={{fontSize:12,color:G[600],fontWeight:700,letterSpacing:".14em",textTransform:"uppercase",marginBottom:12}}>Why AIResume</div>
               <h2 style={{fontSize:"clamp(30px,4vw,52px)",fontWeight:800,letterSpacing:"-0.04em",margin:"0 0 14px",fontFamily:"'Lora',serif",color:text}}>
                 Everything you need<br/>to get hired faster
               </h2>
@@ -1418,7 +1418,7 @@ export default function Home(){
           </h2>
         </Reveal>
         {[
-          {q:"Is ResumeAI really free?",a:"Yes! The free plan lets you build and download up to 3 resumes forever. No hidden fees, no credit card required."},
+          {q:"Is AIResume really free?",a:"Yes! The free plan lets you build and download up to 3 resumes forever. No hidden fees, no credit card required."},
           {q:"How does the AI writing work?",a:"Our AI analyzes your role, industry, and experience, then suggests tailored bullet points, power verbs, and quantified achievements in real time."},
           {q:"What is an ATS score?",a:"ATS (Applicant Tracking System) score measures how well your resume passes automated screening. We score against real Fortune 500 ATS engines live as you edit."},
           {q:"Can I import from LinkedIn?",a:"Absolutely. One click and your entire career history, skills, and education are imported and formatted instantly."},
@@ -1437,7 +1437,7 @@ export default function Home(){
               Your next job starts here
             </h2>
             <p style={{color:"rgba(255,255,255,0.82)",fontSize:16.5,margin:"0 0 36px",lineHeight:1.68}}>
-              Join 2.4 million professionals who built their dream resume with ResumeAI.
+              Join 2.4 million professionals who built their dream resume with AiResume.
             </p>
             <button className="cta-white-btn"  onClick={() => navigate("/login")}>Create My Free Resume →</button>
             <p style={{marginTop:16,fontSize:13,color:"rgba(255,255,255,0.58)"}}>Takes 3 minutes · No signup required to start</p>
@@ -1453,7 +1453,7 @@ export default function Home(){
           <div>
             <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
               <div style={{width:46,height:46,borderRadius:12,background:"linear-gradient(135deg,#22c55e,#16a34a)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:22,boxShadow:"0 10px 25px rgba(34,197,94,0.4)"}}>✦</div>
-              <h2 style={{color:"#fff",fontSize:24,fontWeight:800,letterSpacing:"-0.04em"}}>Resume<span style={{color:"#4ade80"}}>AI</span></h2>
+              <h2 style={{color:"#fff",fontSize:24,fontWeight:800,letterSpacing:"-0.04em"}}>AI<span style={{color:"#4ade80"}}>Resume</span></h2>
             </div>
             <p style={{color:"rgba(255,255,255,0.65)",lineHeight:1.8,maxWidth:320,fontSize:14}}>
               Build AI-powered resumes that stand out, beat ATS systems, and help you land your dream job faster.
@@ -1486,7 +1486,7 @@ export default function Home(){
           </div>
         </div>
         <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:22,display:"flex",justifyContent:"space-between",alignItems:"center",position:"relative",zIndex:2}}>
-          <p style={{color:"rgba(255,255,255,0.45)",fontSize:13}}>© 2026 ResumeAI. All rights reserved.</p>
+          <p style={{color:"rgba(255,255,255,0.45)",fontSize:13}}>© 2026 AIResume. All rights reserved.</p>
           <div style={{display:"flex",gap:24}}>
             {["Privacy Policy","Terms","Support"].map(item=>(
               <span key={item} className="footer-legal-item">{item}</span>
