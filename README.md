@@ -1,4 +1,4 @@
-# 🚀 AI Resume Builder
+# 🚀 ResumeAi Builder
 
 An AI-powered Resume Builder that helps users create professional resumes, analyze resume quality, improve ATS scores, and download resumes as PDF files.
 
