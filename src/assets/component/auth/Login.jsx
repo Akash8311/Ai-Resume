@@ -78,7 +78,6 @@ function GoogleIcon() {
   );
 }
 
-/* ── typewriter ── */
 function Typewriter({ texts }) {
   const [ti, setTi] = useState(0); const [chars, setChars] = useState(0); const [del, setDel] = useState(false);
   useEffect(() => {
